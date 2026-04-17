@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De_UchyTech — Premium Laptops</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+<!-- Cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">De_UchyTech</div>
+  <div class="nav-links">
+    <a href="shop.html">Shop</a>
+    <a href="deals.html">Deals</a>
+    <a href="compare.html">Compare</a>
+    <a href="reviews.html">Reviews</a>
+  </div>
+  <button class="nav-cta" onclick="toggleCart()">
+    Cart <span class="cart-count" id="cartCount">0</span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg-text">De_UchyTech</div>
+  <div class="hero-left">
+    <div class="hero-tag">2025 Collection — New Arrivals</div>
+    <h1 class="hero-title">POWER<br>YOUR<br><span>EDGE.</span></h1>
+    <p class="hero-sub">Engineered for the relentless. Laptops that don't just keep up — they set the pace. From studio to battlefield.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Shop Now</button>
+      <button class="btn-ghost" onclick="document.getElementById('deals').scrollIntoView({behavior:'smooth'})">View Deals</button>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">48h</div>
+        <div class="stat-label">Fast Delivery</div>
+      </div>
+      <div>
+        <div class="stat-num">5★</div>
+        <div class="stat-label">Avg Rating</div>
+      </div>
+      <div>
+        <div class="stat-num">2yr</div>
+        <div class="stat-label">Warranty</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-laptop-wrapper">
+      <!-- Laptop SVG illustration -->
+      <svg class="laptop-svg" viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg">
+        <!-- Base/keyboard -->
+        <rect x="40" y="270" width="440" height="60" rx="8" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1.5"/>
+        <rect x="60" y="280" width="400" height="38" rx="4" fill="#141414"/>
+        <!-- Keys row -->
+        <g fill="#222" stroke="#2d2d2d" stroke-width="0.5">
+          <rect x="72" y="286" width="18" height="11" rx="2"/>
+          <rect x="94" y="286" width="18" height="11" rx="2"/>
+          <rect x="116" y="286" width="18" height="11" rx="2"/>
+          <rect x="138" y="286" width="18" height="11" rx="2"/>
+          <rect x="160" y="286" width="18" height="11" rx="2"/>
+          <rect x="182" y="286" width="18" height="11" rx="2"/>
+          <rect x="204" y="286" width="18" height="11" rx="2"/>
+          <rect x="226" y="286" width="18" height="11" rx="2"/>
+          <rect x="248" y="286" width="18" height="11" rx="2"/>
+          <rect x="270" y="286" width="18" height="11" rx="2"/>
+          <rect x="292" y="286" width="18" height="11" rx="2"/>
+          <rect x="314" y="286" width="18" height="11" rx="2"/>
+          <rect x="336" y="286" width="18" height="11" rx="2"/>
+          <rect x="358" y="286" width="28" height="11" rx="2"/>
+          <!-- second row -->
+          <rect x="72" y="302" width="24" height="11" rx="2"/>
+          <rect x="100" y="302" width="18" height="11" rx="2"/>
+          <rect x="122" y="302" width="18" height="11" rx="2"/>
+          <rect x="144" y="302" width="18" height="11" rx="2"/>
+          <rect x="166" y="302" width="18" height="11" rx="2"/>
+          <rect x="188" y="302" width="18" height="11" rx="2"/>
+          <rect x="210" y="302" width="18" height="11" rx="2"/>
+          <rect x="232" y="302" width="18" height="11" rx="2"/>
+          <rect x="254" y="302" width="18" height="11" rx="2"/>
+          <rect x="276" y="302" width="18" height="11" rx="2"/>
+          <rect x="298" y="302" width="18" height="11" rx="2"/>
+          <rect x="320" y="302" width="18" height="11" rx="2"/>
+          <rect x="342" y="302" width="44" height="11" rx="2"/>
+          <!-- spacebar row -->
+          <rect x="140" y="318" width="180" height="11" rx="2"/>
+          <rect x="72" y="318" width="28" height="11" rx="2"/>
+          <rect x="325" y="318" width="20" height="11" rx="2"/>
+          <rect x="349" y="318" width="20" height="11" rx="2"/>
+          <rect x="373" y="318" width="15" height="11" rx="2"/>
+        </g>
+        <!-- Trackpad -->
+        <rect x="205" y="290" width="70" height="38" rx="3" fill="#181818" stroke="#252525" stroke-width="1"/>
+
+        <!-- Screen base/hinge -->
+        <rect x="40" y="265" width="440" height="12" rx="2" fill="#111"/>
+
+        <!-- Screen body -->
+        <rect x="50" y="50" width="420" height="220" rx="10" fill="#1a1a1a" stroke="#222" stroke-width="2"/>
+        <!-- Screen bezel -->
+        <rect x="60" y="60" width="400" height="200" rx="6" fill="#0a0a0a"/>
+        <!-- Screen glow -->
+        <rect x="65" y="65" width="390" height="190" rx="4" fill="url(#screenGrad)"/>
+        <!-- Screen content - UI mockup -->
+        <defs>
+          <linearGradient id="screenGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#0d0d0d"/>
+            <stop offset="50%" stop-color="#111"/>
+            <stop offset="100%" stop-color="#0a0a0a"/>
+          </linearGradient>
+        </defs>
+        <!-- UI on screen -->
+        <rect x="75" y="75" width="80" height="6" rx="2" fill="#e8ff00" opacity="0.7"/>
+        <rect x="75" y="87" width="50" height="4" rx="1" fill="#333"/>
+        <rect x="75" y="97" width="360" height="100" rx="3" fill="#141414"/>
+        <rect x="85" y="108" width="200" height="8" rx="2" fill="#e8ff00" opacity="0.4"/>
+        <rect x="85" y="122" width="150" height="5" rx="1" fill="#2a2a2a"/>
+        <rect x="85" y="132" width="180" height="5" rx="1" fill="#222"/>
+        <rect x="85" y="142" width="130" height="5" rx="1" fill="#222"/>
+        <rect x="85" y="158" width="60" height="22" rx="2" fill="#e8ff00"/>
+        <rect x="85" y="207" width="370" height="1" fill="#1f1f1f"/>
+        <rect x="85" y="215" width="90" height="20" rx="3" fill="#1c1c1c"/>
+        <rect x="185" y="215" width="90" height="20" rx="3" fill="#1c1c1c"/>
+        <rect x="285" y="215" width="90" height="20" rx="3" fill="#1c1c1c"/>
+        <!-- Webcam -->
+        <circle cx="260" cy="56" r="4" fill="#111" stroke="#222" stroke-width="1"/>
+        <circle cx="260" cy="56" r="2" fill="#1a1a1a"/>
+        <circle cx="261" cy="55" r="0.8" fill="#333"/>
+      </svg>
+    </div>
+    <div class="hero-price-badge">FROM $799</div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-bar">
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item">FREE SHIPPING OVER $500</span>
+    <span class="marquee-item">2-YEAR WARRANTY</span>
+    <span class="marquee-item">30-DAY RETURNS</span>
+    <span class="marquee-item">CERTIFIED REFURBISHED</span>
+    <span class="marquee-item">STUDENT DISCOUNT 15%</span>
+    <span class="marquee-item">TRADE-IN AVAILABLE</span>
+    <span class="marquee-item">FREE SHIPPING OVER $500</span>
+    <span class="marquee-item">2-YEAR WARRANTY</span>
+    <span class="marquee-item">30-DAY RETURNS</span>
+    <span class="marquee-item">CERTIFIED REFURBISHED</span>
+    <span class="marquee-item">STUDENT DISCOUNT 15%</span>
+    <span class="marquee-item">TRADE-IN AVAILABLE</span>
+  </div>
+</div>
+<!-- PRODUCTS -->
+<section class="products-section" id="products">
+  <div class="section-tag">— Our Collection</div>
+  <h2 class="section-title">SHOP LAPTOPS</h2>
+  <div class="filter-bar" id="filterBar">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="gaming">Gaming</button>
+    <button class="filter-btn" data-filter="creative">Creative</button>
+    <button class="filter-btn" data-filter="business">Business</button>
+    <button class="filter-btn" data-filter="budget">Budget</button>
+  </div>
+  <div class="product-grid" id="productGrid"></div>
+</section>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">De_UchyTech</div>
+      <p class="footer-desc">Premium laptops engineered for those who demand more. Power, precision, and performance — no compromises.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <a href="#">Gaming Laptops</a>
+      <a href="#">Creative Workstations</a>
+      <a href="#">Business Series</a>
+      <a href="#">Budget Picks</a>
+      <a href="#">Accessories</a>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <a href="#">Track Order</a>
+      <a href="#">Returns Policy</a>
+      <a href="#">Warranty</a>
+      <a href="#">FAQ</a>
+      <a href="#">Contact Us</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About De_UchyTech</a>
+      <a href="#">Careers</a>
+      <a href="#">Press</a>
+      <a href="#">Sustainability</a>
+      <a href="#">Blog</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 De_UchyTech SYSTEMS — ALL RIGHTS RESERVED</span>
+    <span>PRIVACY · TERMS · COOKIES</span>
+  </div>
+</footer>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <div class="cart-title">Your Cart</div>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="empty-cart">YOUR CART IS EMPTY</div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total-row">
+      <span class="cart-total-label">Total</span>
+      <span class="cart-total-amount" id="cartTotal">$0</span>
+    </div>
+    <button class="checkout-btn">Proceed to Checkout →</button>
+  </div>
+</div>
+<script src="script.js">
+</script>
+</body>
+</html>

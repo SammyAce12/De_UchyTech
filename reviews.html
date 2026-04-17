@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De_UchyTech — Premium Laptops</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+<!-- Cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">De_UchyTech</div>
+  <div class="nav-links">
+    <a href="shop.html">Shop</a>
+    <a href="deals.html">Deals</a>
+    <a href="compare.html">Compare</a>
+    <a href="reviews.html">Reviews</a>
+  </div>
+  <button class="nav-cta" onclick="toggleCart()">
+    Cart <span class="cart-count" id="cartCount">0</span>
+  </button>
+</nav>
+
+<!-- MARQUEE -->
+<div class="marquee-bar">
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item">FREE SHIPPING OVER $500</span>
+    <span class="marquee-item">2-YEAR WARRANTY</span>
+    <span class="marquee-item">30-DAY RETURNS</span>
+    <span class="marquee-item">CERTIFIED REFURBISHED</span>
+    <span class="marquee-item">STUDENT DISCOUNT 15%</span>
+    <span class="marquee-item">TRADE-IN AVAILABLE</span>
+    <span class="marquee-item">FREE SHIPPING OVER $500</span>
+    <span class="marquee-item">2-YEAR WARRANTY</span>
+    <span class="marquee-item">30-DAY RETURNS</span>
+    <span class="marquee-item">CERTIFIED REFURBISHED</span>
+    <span class="marquee-item">STUDENT DISCOUNT 15%</span>
+    <span class="marquee-item">TRADE-IN AVAILABLE</span>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section" id="reviews">
+  <div class="section-tag">— Customer Reviews</div>
+  <h2 class="section-title">WHAT THEY SAY</h2>
+  <div class="testimonials-grid">
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"The Titan X Pro is an absolute monster. Renders my 3D scenes in half the time my old rig did. The 240Hz display is buttery smooth — I can't go back."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">KL</div>
+        <div>
+          <div class="author-name">KWAME L.</div>
+          <div class="author-role">3D Artist, Accra</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"ProBook Air is the perfect travel companion. Ultra-light, the battery easily lasts my whole work day. Build quality feels premium without the premium price."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">AM</div>
+        <div>
+          <div class="author-name">AMIRA M.</div>
+          <div class="author-role">Consultant, Lagos</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★☆</div>
+      <p class="testimonial-text">"Studio 15's OLED display is jaw-dropping for photo and video editing. Colors are so accurate I barely need to calibrate. Shipping was lightning fast too."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">SO</div>
+        <div>
+          <div class="author-name">SARAH O.</div>
+          <div class="author-role">Photographer, Nairobi</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Excellent customer support and seamless ordering. My UltraSlim arrived in perfect condition. It handles everything I throw at it without breaking a sweat."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">TN</div>
+        <div>
+          <div class="author-name">TUNDE N.</div>
+          <div class="author-role">Developer, Abuja</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"ProBook Air is the perfect travel companion. Ultra-light, the battery easily lasts my whole work day. Build quality feels premium without the premium price."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">AM</div>
+        <div>
+          <div class="author-name">AMIRA M.</div>
+          <div class="author-role">Consultant, Lagos</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★☆</div>
+      <p class="testimonial-text">"Studio 15's OLED display is jaw-dropping for photo and video editing. Colors are so accurate I barely need to calibrate. Shipping was lightning fast too."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">SO</div>
+        <div>
+          <div class="author-name">SARAH O.</div>
+          <div class="author-role">Photographer, Nairobi</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"The Titan X Pro is an absolute monster. Renders my 3D scenes in half the time my old rig did. The 240Hz display is buttery smooth — I can't go back."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">KL</div>
+        <div>
+          <div class="author-name">KWAME L.</div>
+          <div class="author-role">3D Artist, Accra</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★☆</div>
+      <p class="testimonial-text">"Studio 15's OLED display is jaw-dropping for photo and video editing. Colors are so accurate I barely need to calibrate. Shipping was lightning fast too."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">SO</div>
+        <div>
+          <div class="author-name">SARAH O.</div>
+          <div class="author-role">Photographer, Nairobi</div>
+        </div>
+      </div>
+  </div>
+</section>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">De_UchyTech</div>
+      <p class="footer-desc">Premium laptops engineered for those who demand more. Power, precision, and performance — no compromises.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <a href="#">Gaming Laptops</a>
+      <a href="#">Creative Workstations</a>
+      <a href="#">Business Series</a>
+      <a href="#">Budget Picks</a>
+      <a href="#">Accessories</a>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <a href="#">Track Order</a>
+      <a href="#">Returns Policy</a>
+      <a href="#">Warranty</a>
+      <a href="#">FAQ</a>
+      <a href="#">Contact Us</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About De_UchyTech</a>
+      <a href="#">Careers</a>
+      <a href="#">Press</a>
+      <a href="#">Sustainability</a>
+      <a href="#">Blog</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 De_UchyTech SYSTEMS — ALL RIGHTS RESERVED</span>
+    <span>PRIVACY · TERMS · COOKIES</span>
+  </div>
+</footer>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <div class="cart-title">Your Cart</div>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="empty-cart">YOUR CART IS EMPTY</div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total-row">
+      <span class="cart-total-label">Total</span>
+      <span class="cart-total-amount" id="cartTotal">$0</span>
+    </div>
+    <button class="checkout-btn">Proceed to Checkout →</button>
+  </div>
+</div>
+<script src="script.js">
+
+</script>
+</body>
+</html>
