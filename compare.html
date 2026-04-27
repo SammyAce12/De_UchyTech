@@ -15,8 +15,11 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">De_UchyTech</div>
-  <div class="nav-links">
+  <a class="nav-logo" href="index.html">De_UchyTech</a>
+  <button class="nav-menu-btn" id="navMenuBtn" aria-label="Toggle navigation" aria-controls="navLinks" aria-expanded="false" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links" id="navLinks">
     <a href="shop.html">Shop</a>
     <a href="deals.html">Deals</a>
     <a href="compare.html">Compare</a>
@@ -44,7 +47,7 @@
         <div class="stat-label">Fast Delivery</div>
       </div>
       <div>
-        <div class="stat-num">5★</div>
+        <div class="stat-num">5*</div>
         <div class="stat-label">Avg Rating</div>
       </div>
       <div>
@@ -221,8 +224,8 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2025 De_UchyTech SYSTEMS — ALL RIGHTS RESERVED</span>
-    <span>PRIVACY · TERMS · COOKIES</span>
+    <span>(c) 2025 De_UchyTech SYSTEMS - ALL RIGHTS RESERVED</span>
+    <span>PRIVACY | TERMS | COOKIES</span>
   </div>
 </footer>
 
@@ -231,7 +234,7 @@
 <div class="cart-drawer" id="cartDrawer">
   <div class="cart-header">
     <div class="cart-title">Your Cart</div>
-    <button class="cart-close" onclick="toggleCart()">✕</button>
+    <button class="cart-close" onclick="toggleCart()">x</button>
   </div>
   <div class="cart-items" id="cartItems">
     <div class="empty-cart">YOUR CART IS EMPTY</div>
@@ -241,10 +244,12 @@
       <span class="cart-total-label">Total</span>
       <span class="cart-total-amount" id="cartTotal">$0</span>
     </div>
-    <button class="checkout-btn">Proceed to Checkout →</button>
+    <button class="checkout-btn">Proceed to Checkout -></button>
   </div>
 </div>
 <script src="script.js">
 </script>
 </body>
 </html>
+
+

@@ -15,8 +15,11 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">De_UchyTech</div>
-  <div class="nav-links">
+  <a class="nav-logo" href="index.html">De_UchyTech</a>
+  <button class="nav-menu-btn" id="navMenuBtn" aria-label="Toggle navigation" aria-controls="navLinks" aria-expanded="false" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links" id="navLinks">
     <a href="shop.html">Shop</a>
     <a href="deals.html">Deals</a>
     <a href="compare.html">Compare</a>
@@ -44,7 +47,7 @@
         <div class="stat-label">Fast Delivery</div>
       </div>
       <div>
-        <div class="stat-num">5★</div>
+        <div class="stat-num">5*</div>
         <div class="stat-label">Avg Rating</div>
       </div>
       <div>
@@ -136,20 +139,20 @@
         <circle cx="261" cy="55" r="0.8" fill="#333"/>
       </svg>
     </div>
-    <div class="hero-price-badge">FROM $799</div>
+    <div class="hero-price-badge">FROM N1,278,400</div>
   </div>
 </section>
 
 <!-- MARQUEE -->
 <div class="marquee-bar">
   <div class="marquee-track" id="marqueeTrack">
-    <span class="marquee-item">FREE SHIPPING OVER $500</span>
+    <span class="marquee-item">FREE SHIPPING OVER N800,000</span>
     <span class="marquee-item">2-YEAR WARRANTY</span>
     <span class="marquee-item">30-DAY RETURNS</span>
     <span class="marquee-item">CERTIFIED REFURBISHED</span>
     <span class="marquee-item">STUDENT DISCOUNT 15%</span>
     <span class="marquee-item">TRADE-IN AVAILABLE</span>
-    <span class="marquee-item">FREE SHIPPING OVER $500</span>
+    <span class="marquee-item">FREE SHIPPING OVER N800,000</span>
     <span class="marquee-item">2-YEAR WARRANTY</span>
     <span class="marquee-item">30-DAY RETURNS</span>
     <span class="marquee-item">CERTIFIED REFURBISHED</span>
@@ -203,8 +206,8 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2025 De_UchyTech SYSTEMS — ALL RIGHTS RESERVED</span>
-    <span>PRIVACY · TERMS · COOKIES</span>
+    <span>(c) 2025 De_UchyTech SYSTEMS - ALL RIGHTS RESERVED</span>
+    <span>PRIVACY | TERMS | COOKIES</span>
   </div>
 </footer>
 
@@ -213,7 +216,7 @@
 <div class="cart-drawer" id="cartDrawer">
   <div class="cart-header">
     <div class="cart-title">Your Cart</div>
-    <button class="cart-close" onclick="toggleCart()">✕</button>
+    <button class="cart-close" onclick="toggleCart()">x</button>
   </div>
   <div class="cart-items" id="cartItems">
     <div class="empty-cart">YOUR CART IS EMPTY</div>
@@ -221,12 +224,15 @@
   <div class="cart-footer" id="cartFooter" style="display:none">
     <div class="cart-total-row">
       <span class="cart-total-label">Total</span>
-      <span class="cart-total-amount" id="cartTotal">$0</span>
+      <span class="cart-total-amount" id="cartTotal">N0</span>
     </div>
-    <button class="checkout-btn">Proceed to Checkout →</button>
+    <button class="checkout-btn">Proceed to Checkout -></button>
   </div>
 </div>
 <script src="script.js">
 </script>
 </body>
 </html>
+
+
+

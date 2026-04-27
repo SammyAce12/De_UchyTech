@@ -1,7 +1,10 @@
-// ─── Custom Cursor ───────────────────────────────────────────────────────────
+// Custom Cursor
 const cursor = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
-let mx = 0, my = 0, rx = 0, ry = 0;
+let mx = 0;
+let my = 0;
+let rx = 0;
+let ry = 0;
 
 document.addEventListener('mousemove', e => {
   mx = e.clientX;
@@ -29,42 +32,156 @@ document.querySelectorAll('button, a, .product-card, .filter-btn').forEach(el =>
   });
 });
 
-// ─── Products Data ────────────────────────────────────────────────────────────
+// Products Data
 const products = [
-  { id: 1, brand: 'APEX', name: 'ProBook Air',    category: 'business', price: 899,  old: 1099, badge: 'sale', specs: ['Intel i7-14th', '16GB DDR5', '512GB NVMe', '14" FHD'],   color: '#e8ff00' },
-  { id: 2, brand: 'APEX', name: 'Titan X Pro',    category: 'gaming',   price: 1599, old: 2299, badge: 'sale', specs: ['Intel i9-14th', '32GB DDR5', '2TB NVMe', '16" 240Hz'],   color: '#ff3c00' },
-  { id: 3, brand: 'APEX', name: 'Studio 15',      category: 'creative', price: 1199, old: 1399, badge: 'new',  specs: ['Ryzen 9', '32GB DDR5', '1TB NVMe', 'OLED 4K'],           color: '#00f0ff' },
-  { id: 4, brand: 'APEX', name: 'UltraSlim 13',   category: 'business', price: 799,  old: null, badge: '',     specs: ['Intel i5-13th', '8GB DDR5', '256GB SSD', '13.3" FHD'],   color: '#e8ff00' },
-  { id: 5, brand: 'APEX', name: 'RazerEdge G16',  category: 'gaming',   price: 1349, old: 1599, badge: 'sale', specs: ['Intel i7-13th', '16GB DDR5', '1TB NVMe', '16" 165Hz'],   color: '#ff3c00' },
-  { id: 6, brand: 'APEX', name: 'Flex 360',       category: 'creative', price: 1049, old: null, badge: 'new',  specs: ['AMD Ryzen 7', '16GB', '512GB NVMe', '14" OLED Touch'],   color: '#b06eff' },
-  { id: 7, brand: 'APEX', name: 'WorkForce Pro',  category: 'business', price: 949,  old: 1149, badge: 'sale', specs: ['Intel i7-14th', '16GB DDR4', '512GB SSD', '15.6" FHD'], color: '#e8ff00' },
-  { id: 8, brand: 'APEX', name: 'BudgetBook 14',  category: 'budget',   price: 499,  old: 599,  badge: 'sale', specs: ['Intel Celeron', '8GB DDR4', '256GB eMMC', '14" HD'],     color: '#888'    },
-  { id: 9, brand: 'APEX', name: 'PowerFlex 15',   category: 'budget',   price: 649,  old: null, badge: '',     specs: ['AMD Ryzen 5', '8GB DDR5', '512GB NVMe', '15.6" FHD'],   color: '#e8ff00' },
+  {
+    id: 1,
+    brand: 'LENOVO',
+    name: 'ThinkPad X1 Carbon Gen 12',
+    category: 'business',
+    price: 2099,
+    old: 2299,
+    badge: 'sale',
+    description: 'Premium ultrabook for executives and hybrid teams.',
+    specs: ['Intel Core Ultra 7', '16GB LPDDR5X', '1TB NVMe SSD', '14" 2.8K OLED'],
+    image: 'https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=900'
+  },
+  {
+    id: 2,
+    brand: 'ASUS',
+    name: 'ROG Strix G16',
+    category: 'gaming',
+    price: 1899,
+    old: 2099,
+    badge: 'sale',
+    description: 'High-refresh gaming laptop built for esports and AAA titles.',
+    specs: ['Intel Core i9', '32GB DDR5', '1TB NVMe SSD', '16" 240Hz QHD'],
+    image: 'https://images.pexels.com/photos/205421/pexels-photo-205421.jpeg?auto=compress&cs=tinysrgb&w=900'
+  },
+  {
+    id: 3,
+    brand: 'APPLE',
+    name: 'MacBook Pro 14 (M3 Pro)',
+    category: 'creative',
+    price: 2399,
+    old: null,
+    badge: 'new',
+    description: 'Color-accurate performance notebook for creators and editors.',
+    specs: ['Apple M3 Pro', '18GB Unified', '1TB SSD', '14.2" Liquid Retina XDR'],
+    image: 'https://images.pexels.com/photos/303383/pexels-photo-303383.jpeg?auto=compress&cs=tinysrgb&w=900'
+  },
+  {
+    id: 4,
+    brand: 'DELL',
+    name: 'Latitude 5440',
+    category: 'business',
+    price: 1199,
+    old: null,
+    badge: '',
+    description: 'Reliable business laptop with strong battery life and security.',
+    specs: ['Intel Core i5-13th', '16GB DDR5', '512GB SSD', '14" FHD'],
+    image: 'https://images.pexels.com/photos/1229861/pexels-photo-1229861.jpeg?auto=compress&cs=tinysrgb&w=900'
+  },
+  {
+    id: 5,
+    brand: 'ACER',
+    name: 'Predator Helios Neo 16',
+    category: 'gaming',
+    price: 1699,
+    old: 1849,
+    badge: 'sale',
+    description: 'Powerful gaming machine with advanced cooling and GPU headroom.',
+    specs: ['Intel Core i7-14th', '16GB DDR5', '1TB NVMe SSD', '16" 165Hz WQXGA'],
+    image: 'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=900'
+  },
+  {
+    id: 6,
+    brand: 'HP',
+    name: 'Spectre x360 14',
+    category: 'creative',
+    price: 1599,
+    old: null,
+    badge: 'new',
+    description: 'Convertible OLED laptop for design, sketching, and daily work.',
+    specs: ['Intel Core Ultra 7', '16GB LPDDR5', '1TB SSD', '14" 2.8K OLED Touch'],
+    image: 'https://images.pexels.com/photos/7974/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=900'
+  },
+  {
+    id: 7,
+    brand: 'MICROSOFT',
+    name: 'Surface Laptop 6',
+    category: 'business',
+    price: 1499,
+    old: 1649,
+    badge: 'sale',
+    description: 'Professional productivity laptop with clean design and AI features.',
+    specs: ['Intel Core Ultra 7', '16GB LPDDR5X', '512GB SSD', '15" PixelSense'],
+    image: 'https://images.pexels.com/photos/374074/pexels-photo-374074.jpeg?auto=compress&cs=tinysrgb&w=900'
+  },
+  {
+    id: 8,
+    brand: 'LENOVO',
+    name: 'IdeaPad Slim 3',
+    category: 'budget',
+    price: 699,
+    old: 799,
+    badge: 'sale',
+    description: 'Affordable everyday laptop for students and office basics.',
+    specs: ['AMD Ryzen 5', '8GB DDR4', '512GB SSD', '15.6" FHD'],
+    image: 'https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=900'
+  },
+  {
+    id: 9,
+    brand: 'HP',
+    name: 'Pavilion 15',
+    category: 'budget',
+    price: 849,
+    old: null,
+    badge: '',
+    description: 'Balanced value laptop for browsing, school, and multitasking.',
+    specs: ['Intel Core i5', '16GB DDR4', '512GB SSD', '15.6" FHD'],
+    image: 'https://images.pexels.com/photos/7974/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=900'
+  }
 ];
 
-// ─── Laptop SVG Icon ──────────────────────────────────────────────────────────
-function laptopIcon(color = '#e8ff00') {
-  return `<svg viewBox="0 0 120 85" xmlns="http://www.w3.org/2000/svg">
-    <rect x="5" y="60" width="110" height="18" rx="3" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1"/>
-    <rect x="5" y="57" width="110" height="6" rx="1" fill="#111"/>
-    <rect x="10" y="10" width="100" height="50" rx="5" fill="#151515" stroke="#222" stroke-width="1.5"/>
-    <rect x="14" y="14" width="92" height="42" rx="3" fill="#0a0a0a"/>
-    <rect x="16" y="16" width="88" height="38" rx="2" fill="url(#g${color.replace('#', '')})"/>
-    <defs>
-      <linearGradient id="g${color.replace('#', '')}" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="${color}" stop-opacity="0.08"/>
-        <stop offset="100%" stop-color="#000" stop-opacity="0.1"/>
-      </linearGradient>
-    </defs>
-    <circle cx="60" cy="7" r="1.5" fill="#111" stroke="#1f1f1f" stroke-width="0.5"/>
-  </svg>`;
+const USD_TO_NGN = 1600;
+
+function naira(valueInUsd) {
+  return new Intl.NumberFormat('en-NG', {
+    style: 'currency',
+    currency: 'NGN',
+    maximumFractionDigits: 0
+  }).format(valueInUsd * USD_TO_NGN);
 }
 
-// ─── State ────────────────────────────────────────────────────────────────────
+// State
 let cart = [];
 let activeFilter = 'all';
+const navRoot = document.querySelector('nav');
+const navMenuBtn = document.getElementById('navMenuBtn');
 
-// ─── Render Products ──────────────────────────────────────────────────────────
+function closeMenu() {
+  if (!navRoot || !navMenuBtn) return;
+  navRoot.classList.remove('nav-open');
+  navMenuBtn.setAttribute('aria-expanded', 'false');
+}
+
+function toggleMenu() {
+  if (!navRoot || !navMenuBtn) return;
+  const isOpen = navRoot.classList.toggle('nav-open');
+  navMenuBtn.setAttribute('aria-expanded', String(isOpen));
+}
+
+if (navRoot) {
+  navRoot.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900) closeMenu();
+  });
+}
+
+// Render Products
 function renderProducts(filter = 'all') {
   const grid = document.getElementById('productGrid');
   const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
@@ -73,23 +190,23 @@ function renderProducts(filter = 'all') {
     const inCart = cart.find(c => c.id === p.id);
     return `<div class="product-card reveal" data-category="${p.category}">
       ${p.badge ? `<div class="product-badge ${p.badge}">${p.badge === 'new' ? 'NEW' : 'SALE'}</div>` : ''}
-      <div class="product-img-wrap">${laptopIcon(p.color)}</div>
+      <div class="product-img-wrap"><img class="product-image" src="${p.image}" alt="${p.brand} ${p.name}"></div>
       <div class="product-brand">${p.brand}</div>
       <div class="product-name">${p.name}</div>
+      <div class="product-desc">${p.description}</div>
       <div class="product-specs">${p.specs.map(s => `<span class="spec-tag">${s}</span>`).join('')}</div>
       <div class="product-footer">
         <div>
-          ${p.old ? `<div class="product-old-price">$${p.old.toLocaleString()}</div>` : ''}
-          <div class="product-price">$${p.price.toLocaleString()}</div>
+          ${p.old ? `<div class="product-old-price">${naira(p.old)}</div>` : ''}
+          <div class="product-price">${naira(p.price)}</div>
         </div>
         <button class="add-cart-btn${inCart ? ' added' : ''}" onclick="addToCart(${p.id})">
-          ${inCart ? '✓ Added' : '+ Cart'}
+          ${inCart ? 'Added' : '+ Cart'}
         </button>
       </div>
     </div>`;
   }).join('');
 
-  // Trigger reveal animations
   setTimeout(() => {
     document.querySelectorAll('.product-card').forEach((el, i) => {
       setTimeout(() => el.classList.add('visible'), i * 60);
@@ -97,7 +214,7 @@ function renderProducts(filter = 'all') {
   }, 50);
 }
 
-// ─── Filter Bar ───────────────────────────────────────────────────────────────
+// Filter Bar
 if (document.getElementById('filterBar')) {
   document.getElementById('filterBar').addEventListener('click', e => {
     const btn = e.target.closest('.filter-btn');
@@ -109,7 +226,7 @@ if (document.getElementById('filterBar')) {
   });
 }
 
-// ─── Cart Logic ───────────────────────────────────────────────────────────────
+// Cart Logic
 function addToCart(id) {
   const product = products.find(p => p.id === id);
   if (!product) return;
@@ -117,15 +234,16 @@ function addToCart(id) {
     cart.push({ ...product, qty: 1 });
     updateCartUI();
     renderProducts(activeFilter);
-    // Flash cart count
     const cc = document.getElementById('cartCount');
     cc.style.transform = 'scale(1.5)';
-    setTimeout(() => cc.style.transform = 'scale(1)', 200);
+    setTimeout(() => {
+      cc.style.transform = 'scale(1)';
+    }, 200);
   }
 }
 
 function addDealToCart() {
-  addToCart(2); // Titan X Pro
+  addToCart(2);
   toggleCart();
 }
 
@@ -146,26 +264,28 @@ function updateCartUI() {
   } else {
     itemsEl.innerHTML = cart.map(item => `
       <div class="cart-item">
-        <div class="cart-item-icon">${laptopIcon(item.color)}</div>
+        <div class="cart-item-icon"><img class="cart-item-image" src="${item.image}" alt="${item.name}"></div>
         <div class="cart-item-info">
           <div class="cart-item-name">${item.name}</div>
-          <div class="cart-item-price">$${item.price.toLocaleString()}</div>
+          <div class="cart-item-price">${naira(item.price)}</div>
         </div>
-        <button class="cart-item-remove" onclick="removeFromCart(${item.id})">✕</button>
+        <button class="cart-item-remove" onclick="removeFromCart(${item.id})">x</button>
       </div>
     `).join('');
+
     const total = cart.reduce((s, i) => s + i.price, 0);
-    document.getElementById('cartTotal').textContent = '$' + total.toLocaleString();
+    document.getElementById('cartTotal').textContent = naira(total);
     footerEl.style.display = 'block';
   }
 }
 
 function toggleCart() {
+  closeMenu();
   document.getElementById('cartDrawer').classList.toggle('open');
   document.getElementById('cartOverlay').classList.toggle('open');
 }
 
-// ─── Countdown Timer ──────────────────────────────────────────────────────────
+// Countdown Timer
 if (document.getElementById('cdHours')) {
   let dealEnd = Date.now() + 8 * 3600 * 1000 + 24 * 60 * 1000;
 
@@ -175,6 +295,7 @@ if (document.getElementById('cdHours')) {
       dealEnd = Date.now() + 24 * 3600 * 1000;
       return;
     }
+
     const h = Math.floor(diff / 3600000);
     const m = Math.floor((diff % 3600000) / 60000);
     const s = Math.floor((diff % 60000) / 1000);
@@ -187,16 +308,15 @@ if (document.getElementById('cdHours')) {
   updateCountdown();
 }
 
-// ─── Scroll Reveal ────────────────────────────────────────────────────────────
+// Scroll Reveal
 const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) e.target.classList.add('visible');
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
   });
 }, { threshold: 0.1 });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// Check for elements already in view on load
 document.querySelectorAll('.reveal').forEach(el => {
   const rect = el.getBoundingClientRect();
   if (rect.top < window.innerHeight && rect.bottom > 0) {
@@ -204,7 +324,7 @@ document.querySelectorAll('.reveal').forEach(el => {
   }
 });
 
-// ─── Init ─────────────────────────────────────────────────────────────────────
+// Init
 if (document.getElementById('productGrid')) {
   renderProducts();
 }
