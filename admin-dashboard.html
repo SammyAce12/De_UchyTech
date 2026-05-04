@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin Dashboard | De UchyTech</title>
+<link rel="stylesheet" href="admin/admin.css" /></head>
+<body><div class="layout"><aside class="sidebar"><div class="brand">De_UchyTech Admin</div><nav class="menu">
+<a href="admin-dashboard.html">Dashboard</a><a href="admin-content.html">Site Content</a><a href="admin-products.html">Products</a><a href="admin-reviews.html">Reviews</a><a href="admin-users.html">Users</a></nav></aside>
+<main><header class="topbar"><div><h1>Dashboard</h1><p>Overview of your store content.</p></div><div class="top-actions"><button class="btn btn-danger logout-btn">Logout</button></div></header>
+<section class="content"><div class="metrics"><div class="metric"><div class="label">Total Users</div><div class="value" id="usersCount">0</div></div><div class="metric"><div class="label">Products</div><div class="value" id="productsCount">0</div></div><div class="metric"><div class="label">Reviews</div><div class="value" id="reviewsCount">0</div></div></div>
+<div class="card"><h3>Quick Access</h3><p>Use the sidebar to manage each category in its own page.</p></div></section></main></div>
+<script src="auth.js"></script><script src="admin/admin-common.js"></script>
+<script>
+(async function(){
+  const user = await requireSeller(); if (!user) return;
+  try { const data = await loadAdminData();
+    usersCount.textContent = data.users.length;
+    productsCount.textContent = Array.isArray(data.content.products) ? data.content.products.length : 0;
+    reviewsCount.textContent = Array.isArray(data.content.customerReviews) ? data.content.customerReviews.length : 0;
+  } catch (e) { console.error(e); }
+})();
+</script></body></html>

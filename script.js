@@ -33,7 +33,7 @@ document.querySelectorAll('button, a, .product-card, .filter-btn').forEach(el =>
 });
 
 // Products Data
-const products = [
+let products = [
   {
     id: 1,
     brand: 'LENOVO',
@@ -144,14 +144,66 @@ const products = [
   }
 ];
 
-const USD_TO_NGN = 1600;
-
-function naira(valueInUsd) {
+function naira(valueInNaira) {
   return new Intl.NumberFormat('en-NG', {
     style: 'currency',
     currency: 'NGN',
     maximumFractionDigits: 0
-  }).format(valueInUsd * USD_TO_NGN);
+  }).format(valueInNaira);
+}
+
+async function applySiteContent() {
+  try {
+    const res = await fetch('/api/content');
+    if (!res.ok) return;
+    const content = await res.json();
+
+    const heroTitle = document.querySelector('.hero-title');
+    const heroSub = document.querySelector('.hero-sub');
+    const footerDesc = document.querySelector('.footer-desc');
+    const sectionTitles = Array.from(document.querySelectorAll('.section-title'));
+    const dealTitle = document.querySelector('.deal-title');
+    const testimonialsGrid = document.querySelector('.testimonials-grid');
+
+    if (heroTitle && content.hero?.title) heroTitle.innerHTML = content.hero.title;
+    if (heroSub && content.hero?.subtitle) heroSub.textContent = content.hero.subtitle;
+    if (footerDesc && content.shop?.description) footerDesc.textContent = content.shop.description;
+
+    sectionTitles.forEach((el) => {
+      const text = (el.textContent || '').toUpperCase();
+      if (text.includes('SHOP') && content.shop?.headline) el.textContent = content.shop.headline;
+      if (text.includes('COMPARE') && content.shop?.headline) el.textContent = `${content.shop.headline} MODELS`;
+      if (text.includes('WHAT THEY SAY') && content.reviews?.headline) el.textContent = content.reviews.headline;
+    });
+
+    if (dealTitle && content.deals?.headline) {
+      dealTitle.innerHTML = content.deals.headline.replace(/\s+/g, '<br>');
+    }
+
+    if (Array.isArray(content.products) && content.products.length > 0) {
+      products = content.products;
+      if (document.getElementById('productGrid')) renderProducts(activeFilter);
+    }
+
+    if (testimonialsGrid && Array.isArray(content.customerReviews) && content.customerReviews.length > 0) {
+      testimonialsGrid.innerHTML = content.customerReviews.map((item) => {
+        const stars = '*'.repeat(Number(item.stars) || 5);
+        return `<div class="testimonial-card reveal visible">
+          <div class="stars">${stars}</div>
+          <p class="testimonial-text">"${item.text || ''}"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">${item.avatar || 'CU'}</div>
+            <div>
+              <div class="author-name">${item.authorName || 'Customer'}</div>
+              <div class="author-role">${item.authorRole || ''}</div>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+  } catch {
+    // Keep static fallback content if API is unavailable.
+  }
 }
 
 // State
@@ -159,11 +211,83 @@ let cart = [];
 let activeFilter = 'all';
 const navRoot = document.querySelector('nav');
 const navMenuBtn = document.getElementById('navMenuBtn');
+const CART_STORAGE_KEY = 'de_uchytech_cart';
+let currentUser = null;
 
 function closeMenu() {
   if (!navRoot || !navMenuBtn) return;
   navRoot.classList.remove('nav-open');
   navMenuBtn.setAttribute('aria-expanded', 'false');
+}
+
+function saveCart() {
+  localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+}
+
+function loadCart() {
+  try {
+    const raw = localStorage.getItem(CART_STORAGE_KEY);
+    cart = raw ? JSON.parse(raw) : [];
+    if (!Array.isArray(cart)) cart = [];
+  } catch {
+    cart = [];
+  }
+}
+
+async function getUser() {
+  try {
+    const res = await fetch('/api/auth/me', { credentials: 'include' });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data.user || null;
+  } catch {
+    return null;
+  }
+}
+
+async function logoutUser() {
+  await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
+  window.location.href = '/index.html';
+}
+
+function renderAuthNav() {
+  if (!navRoot) return;
+  const existing = document.getElementById('authNavActions');
+  if (existing) existing.remove();
+
+  const wrapper = document.createElement('div');
+  wrapper.id = 'authNavActions';
+  wrapper.style.display = 'flex';
+  wrapper.style.gap = '8px';
+  wrapper.style.alignItems = 'center';
+
+  if (currentUser) {
+    const accountBtn = document.createElement('button');
+    accountBtn.className = 'nav-cta';
+    accountBtn.textContent = currentUser.role === 'seller' ? 'Dashboard' : currentUser.name || 'My Account';
+    accountBtn.onclick = () => {
+      window.location.href = currentUser.role === 'seller' ? '/admin-dashboard.html' : '/checkout.html';
+    };
+
+    const logoutBtn = document.createElement('button');
+    logoutBtn.className = 'nav-cta';
+    logoutBtn.textContent = 'Logout';
+    logoutBtn.onclick = logoutUser;
+
+    wrapper.appendChild(accountBtn);
+    wrapper.appendChild(logoutBtn);
+  } else {
+    const loginBtn = document.createElement('button');
+    loginBtn.className = 'nav-cta';
+    loginBtn.textContent = 'Login / Sign Up';
+    loginBtn.onclick = () => {
+      const next = encodeURIComponent(window.location.pathname + window.location.search);
+      window.location.href = `/login.html?next=${next}`;
+    };
+    wrapper.appendChild(loginBtn);
+  }
+
+  navRoot.appendChild(wrapper);
 }
 
 function toggleMenu() {
@@ -234,6 +358,7 @@ function addToCart(id) {
     cart.push({ ...product, qty: 1 });
     updateCartUI();
     renderProducts(activeFilter);
+    saveCart();
     const cc = document.getElementById('cartCount');
     cc.style.transform = 'scale(1.5)';
     setTimeout(() => {
@@ -251,6 +376,7 @@ function removeFromCart(id) {
   cart = cart.filter(c => c.id !== id);
   updateCartUI();
   renderProducts(activeFilter);
+  saveCart();
 }
 
 function updateCartUI() {
@@ -277,6 +403,15 @@ function updateCartUI() {
     document.getElementById('cartTotal').textContent = naira(total);
     footerEl.style.display = 'block';
   }
+}
+
+function goToCheckout() {
+  if (!currentUser) {
+    const next = encodeURIComponent('/checkout.html');
+    window.location.href = `/login.html?next=${next}`;
+    return;
+  }
+  window.location.href = '/checkout.html';
 }
 
 function toggleCart() {
@@ -328,3 +463,18 @@ document.querySelectorAll('.reveal').forEach(el => {
 if (document.getElementById('productGrid')) {
   renderProducts();
 }
+
+loadCart();
+updateCartUI();
+
+document.querySelectorAll('.checkout-btn').forEach((btn) => {
+  btn.addEventListener('click', goToCheckout);
+});
+
+getUser().then((user) => {
+  currentUser = user;
+  renderAuthNav();
+});
+
+applySiteContent();
+

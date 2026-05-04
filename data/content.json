@@ -1,0 +1,98 @@
+{
+  "hero": {
+    "title": "Best Deals on Tech Products",
+    "subtitle": "Browse and compare quality gadgets at unbeatable prices"
+  },
+  "shop": {
+    "headline": "Shop Latest Devices",
+    "description": "Find phones, laptops, accessories, and more"
+  },
+  "deals": {
+    "headline": "Hot Deals",
+    "description": "Limited-time offers for top products"
+  },
+  "reviews": {
+    "headline": "Customer Reviews",
+    "description": "See what buyers are saying"
+  },
+  "contact": {
+    "email": "support@deuchytech.com",
+    "phone": "+(234) 070-6737-5254"
+  },
+  "products": [
+    {
+      "id": 1,
+      "brand": "LENOVO",
+      "name": "ThinkPad X1 Carbon Gen 12",
+      "category": "business",
+      "price": 3358400,
+      "old": 3678400,
+      "badge": "sale",
+      "description": "Premium ultrabook for executives and hybrid teams.",
+      "specs": [
+        "Intel Core Ultra 7",
+        "16GB LPDDR5X",
+        "1TB NVMe SSD",
+        "14\" 2.8K OLED"
+      ],
+      "image": "https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=900"
+    },
+    {
+      "id": 2,
+      "brand": "ASUS",
+      "name": "ROG Strix G16",
+      "category": "gaming",
+      "price": 3038400,
+      "old": 3358400,
+      "badge": "sale",
+      "description": "High-refresh gaming laptop built for esports and AAA titles.",
+      "specs": [
+        "Intel Core i9",
+        "32GB DDR5",
+        "1TB NVMe SSD",
+        "16\" 240Hz QHD"
+      ],
+      "image": "https://images.pexels.com/photos/205421/pexels-photo-205421.jpeg?auto=compress&cs=tinysrgb&w=900"
+    },
+    {
+      "id": 3,
+      "brand": "APPLE",
+      "name": "MacBook Pro 14 (M3 Pro)",
+      "category": "creative",
+      "price": 3838400,
+      "old": null,
+      "badge": "new",
+      "description": "Color-accurate performance notebook for creators and editors.",
+      "specs": [
+        "Apple M3 Pro",
+        "18GB Unified",
+        "1TB SSD",
+        "14.2\" Liquid Retina XDR"
+      ],
+      "image": "https://images.pexels.com/photos/303383/pexels-photo-303383.jpeg?auto=compress&cs=tinysrgb&w=900"
+    }
+  ],
+  "customerReviews": [
+    {
+      "stars": 5,
+      "text": "The laptop performance is excellent and delivery was very fast.",
+      "authorName": "KWAME L.",
+      "authorRole": "3D Artist, Accra",
+      "avatar": "KL"
+    },
+    {
+      "stars": 5,
+      "text": "Battery life and build quality exceeded my expectations.",
+      "authorName": "AMIRA M.",
+      "authorRole": "Consultant, Lagos",
+      "avatar": "AM"
+    },
+    {
+      "stars": 5,
+      "text": "Amazing display quality for editing and daily creative work.",
+      "authorName": "SARAH O.",
+      "authorRole": "Photographer, Nairobi",
+      "avatar": "SO"
+    }
+  ]
+}

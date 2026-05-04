@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "id": "1777899289936",
+      "name": "Main Seller",
+      "email": "seller@deuchytech.com",
+      "passwordHash": "$2a$10$nqg.oHnq2A1gM3Fa4svQueC4ia..OsRPLincAebfRmHI2HJV7lrti",
+      "role": "seller",
+      "createdAt": "2026-05-04T12:54:49.936Z"
+    },
+    {
+      "id": "1777900632886",
+      "name": "Sammy Ace",
+      "email": "sammyuche46@gmail.com",
+      "passwordHash": "$2a$10$KxXi2ZVzB6AeEYo2Lrlz9eQugb5Um0HFPYXCZNfUHbzoXUsPhRmGi",
+      "role": "buyer",
+      "createdAt": "2026-05-04T13:17:12.886Z"
+    }
+  ]
+}

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Products | Admin</title>
+  <link rel="stylesheet" href="admin/admin.css" />
+  <style>
+    .split { display:grid; grid-template-columns: 360px 1fr; gap:14px; }
+    .list-item { border:1px solid var(--line); border-radius:8px; padding:10px; background:#fff; margin-bottom:8px; }
+    .list-item.active { border-color:#72aee6; background:#f0f6fc; }
+    .list-title { font-weight:700; font-size:13px; }
+    .list-meta { font-size:12px; color:var(--muted); margin:4px 0 8px; }
+    .row-actions { display:flex; gap:8px; }
+    .btn-small { padding:6px 9px; font-size:12px; border:1px solid var(--line); border-radius:6px; background:#fff; cursor:pointer; }
+    .btn-add { background:#f0f6fc; border-color:#72aee6; color:#135e96; font-weight:600; }
+    .btn-remove { background:#fff8f8; border-color:#e0b4b4; color:#8a2424; }
+    .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .grid-4 { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+    .spec-row { display:grid; grid-template-columns:1fr auto; gap:8px; margin-bottom:8px; }
+    .sub-label { margin:8px 0 6px; font-size:12px; font-weight:600; color:#3c434a; text-transform:uppercase; }
+    .editor-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+    .upload-row { display:grid; grid-template-columns: 1fr auto; gap:8px; margin-top:8px; }
+    .image-preview { margin-top:8px; border:1px solid var(--line); border-radius:8px; padding:8px; background:#fff; width:fit-content; }
+    .image-preview img { width:140px; height:90px; object-fit:cover; border-radius:6px; display:block; }
+    .hint { font-size:12px; color:var(--muted); margin-top:6px; }
+    @media (max-width:1000px){ .split{grid-template-columns:1fr;} .grid-2,.grid-4{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar"><div class="brand">De_UchyTech Admin</div><nav class="menu">
+      <a href="admin-dashboard.html">Dashboard</a><a href="admin-content.html">Site Content</a><a href="admin-products.html">Products</a><a href="admin-reviews.html">Reviews</a><a href="admin-users.html">Users</a>
+    </nav></aside>
+    <main>
+      <header class="topbar"><div><h1>Products</h1><p>Manage laptops shown on shop pages.</p></div><div class="top-actions"><button class="btn btn-primary" id="saveBtn">Save</button><button class="btn btn-danger logout-btn">Logout</button></div></header>
+      <section class="content">
+        <div class="split">
+          <div class="card">
+            <div class="editor-head"><strong>Saved Products</strong><button id="addProductBtn" class="btn-small btn-add" type="button">+ Add Product</button></div>
+            <div id="productsList"></div>
+          </div>
+          <div class="card">
+            <div class="editor-head"><strong id="editorTitle">Product Editor</strong></div>
+            <div class="grid-2">
+              <div><label>Brand</label><input id="fBrand" type="text" /></div>
+              <div><label>Name</label><input id="fName" type="text" /></div>
+            </div>
+            <div class="grid-4">
+              <div><label>Category</label><select id="fCategory"><option value="gaming">Gaming</option><option value="creative">Creative</option><option value="business">Business</option><option value="budget">Budget</option></select></div>
+              <div><label>Price (NGN)</label><input id="fPrice" type="number" min="0" step="1" /></div>
+              <div><label>Old Price (NGN)</label><input id="fOld" type="number" min="0" step="1" /></div>
+              <div><label>Badge</label><select id="fBadge"><option value="">None</option><option value="new">New</option><option value="sale">Sale</option></select></div>
+            </div>
+            <label>Description</label><textarea id="fDescription"></textarea>
+            <label>Image URL</label><input id="fImage" type="url" />
+            <div class="upload-row">
+              <input id="fImageFile" type="file" accept="image/*" />
+              <button id="uploadImageBtn" class="btn-small btn-add" type="button">Upload Local Image</button>
+            </div>
+            <div class="hint">Upload from your computer and it will auto-fill Image URL.</div>
+            <div class="image-preview"><img id="imagePreview" alt="Product image preview" src="" /></div>
+            <div class="sub-label">Specs</div>
+            <div id="specsList"></div>
+            <button id="addSpecBtn" class="btn-small btn-add" type="button">+ Add Spec</button>
+          </div>
+        </div>
+        <div id="status" class="status"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="auth.js"></script><script src="admin/admin-common.js"></script>
+  <script>
+    let contentState = null;
+    let activeIndex = -1;
+
+    function nextProductId(products){ return products.reduce((m,p)=>Math.max(m,Number(p.id)||0),0)+1; }
+    function emptyProduct(id){ return { id, brand:'', name:'', category:'business', price:0, old:null, badge:'', description:'', specs:[''], image:'' }; }
+    function specRow(v=''){ return `<div class="spec-row"><input class="spec-input" type="text" value="${String(v).replace(/"/g,'&quot;')}" /><button type="button" class="btn-small btn-remove del-spec">Delete</button></div>`; }
+
+    function renderList(){
+      const list = contentState.products || [];
+      productsList.innerHTML = list.map((p,i)=>`<div class="list-item ${i===activeIndex?'active':''}" data-i="${i}"><div class="list-title">${p.brand||'No Brand'} - ${p.name||'No Name'}</div><div class="list-meta">${p.category||'-'} | $${Number(p.price)||0}</div><div class="row-actions"><button type="button" class="btn-small edit-btn">Edit</button><button type="button" class="btn-small btn-remove del-btn">Delete</button></div></div>`).join('');
+    }
+
+    function loadEditor(i){
+      const p = contentState.products[i]; if(!p) return;
+      activeIndex = i; renderList();
+      editorTitle.textContent = `Editing: ${p.name || 'Product ' + (i+1)}`;
+      fBrand.value = p.brand || ''; fName.value = p.name || ''; fCategory.value = p.category || 'business';
+      fPrice.value = Number(p.price)||0; fOld.value = p.old == null ? '' : Number(p.old); fBadge.value = p.badge || '';
+      fDescription.value = p.description || ''; fImage.value = p.image || '';
+      imagePreview.src = p.image || '';
+      const specs = Array.isArray(p.specs)&&p.specs.length?p.specs:[''];
+      specsList.innerHTML = specs.map((s)=>specRow(s)).join('');
+    }
+
+    function saveEditorToState(){
+      if(activeIndex<0) return;
+      const oldVal = fOld.value;
+      contentState.products[activeIndex] = {
+        ...contentState.products[activeIndex],
+        brand:fBrand.value.trim(), name:fName.value.trim(), category:fCategory.value,
+        price:Number(fPrice.value)||0, old: oldVal===''?null:Number(oldVal), badge:fBadge.value,
+        description:fDescription.value.trim(), image:fImage.value.trim(),
+        specs:Array.from(specsList.querySelectorAll('.spec-input')).map(s=>s.value.trim()).filter(Boolean)
+      };
+      renderList();
+    }
+
+    productsList.addEventListener('click',(e)=>{
+      const item = e.target.closest('.list-item'); if(!item) return;
+      const i = Number(item.dataset.i);
+      if(e.target.closest('.edit-btn')){ saveEditorToState(); loadEditor(i); return; }
+      if(e.target.closest('.del-btn')){ contentState.products.splice(i,1); if(contentState.products.length===0){ contentState.products=[emptyProduct(1)]; } activeIndex=Math.min(i,contentState.products.length-1); renderList(); loadEditor(activeIndex); return; }
+    });
+
+    addSpecBtn.addEventListener('click',()=>{ specsList.insertAdjacentHTML('beforeend', specRow('')); });
+    specsList.addEventListener('click',(e)=>{ if(!e.target.closest('.del-spec')) return; const rows=specsList.querySelectorAll('.spec-row'); if(rows.length<=1){ rows[0].querySelector('.spec-input').value=''; return;} e.target.closest('.spec-row').remove(); });
+
+    [fBrand,fName,fCategory,fPrice,fOld,fBadge,fDescription,fImage].forEach((el)=> el.addEventListener('input', saveEditorToState));
+    fImage.addEventListener('input', () => { imagePreview.src = fImage.value.trim(); });
+    specsList.addEventListener('input', saveEditorToState);
+
+    addProductBtn.addEventListener('click',()=>{
+      saveEditorToState();
+      const id = nextProductId(contentState.products||[]);
+      contentState.products.push(emptyProduct(id));
+      loadEditor(contentState.products.length-1);
+    });
+
+    saveBtn.addEventListener('click', async ()=>{
+      try{ saveEditorToState(); const payload={...contentState, products:contentState.products}; await apiRequest('/api/admin/content',{method:'PUT',body:JSON.stringify(payload)}); contentState=payload; setStatus('Products saved.','ok'); }
+      catch(e){ setStatus(e.message,'error'); }
+    });
+
+    uploadImageBtn.addEventListener('click', async () => {
+      const file = fImageFile.files && fImageFile.files[0];
+      if (!file) {
+        setStatus('Choose an image file first.', 'error');
+        return;
+      }
+
+      try {
+        setStatus('Uploading image...', 'ok');
+        const fd = new FormData();
+        fd.append('image', file);
+        const res = await fetch('/api/admin/upload-image', {
+          method: 'POST',
+          credentials: 'include',
+          body: fd
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Upload failed');
+        fImage.value = data.imageUrl;
+        imagePreview.src = data.imageUrl;
+        saveEditorToState();
+        setStatus('Image uploaded and attached to product.', 'ok');
+      } catch (e) {
+        setStatus(e.message, 'error');
+      }
+    });
+
+    (async()=>{ const user=await requireSeller(); if(!user) return; try{ const data=await loadAdminData(); contentState=data.content; contentState.products=Array.isArray(contentState.products)&&contentState.products.length?contentState.products:[emptyProduct(1)]; activeIndex=0; renderList(); loadEditor(0);} catch(e){ setStatus(e.message,'error'); }})();
+  </script>
+</body>
+</html>

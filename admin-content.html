@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Site Content | Admin</title><link rel="stylesheet" href="admin/admin.css" /></head>
+<body><div class="layout"><aside class="sidebar"><div class="brand">De_UchyTech Admin</div><nav class="menu">
+<a href="admin-dashboard.html">Dashboard</a><a href="admin-content.html">Site Content</a><a href="admin-products.html">Products</a><a href="admin-reviews.html">Reviews</a><a href="admin-users.html">Users</a></nav></aside>
+<main><header class="topbar"><div><h1>Site Content</h1><p>Edit hero, section text, and contact details.</p></div><div class="top-actions"><button class="btn btn-primary" id="saveBtn">Save</button><button class="btn btn-danger logout-btn">Logout</button></div></header>
+<section class="content"><div class="card"><label>Hero Title</label><input id="heroTitle" /><label>Hero Subtitle</label><textarea id="heroSubtitle"></textarea>
+<label>Shop Headline</label><input id="shopHeadline" /><label>Shop Description</label><textarea id="shopDescription"></textarea>
+<label>Deals Headline</label><input id="dealsHeadline" /><label>Deals Description</label><textarea id="dealsDescription"></textarea>
+<label>Reviews Headline</label><input id="reviewsHeadline" /><label>Reviews Description</label><textarea id="reviewsDescription"></textarea>
+<label>Contact Email</label><input id="contactEmail" /><label>Contact Phone</label><input id="contactPhone" /></div><div id="status" class="status"></div></section></main></div>
+<script src="auth.js"></script><script src="admin/admin-common.js"></script>
+<script>
+let contentState = null;
+(async function(){
+  const user = await requireSeller(); if (!user) return;
+  try {
+    const data = await loadAdminData(); contentState = data.content;
+    heroTitle.value = contentState.hero?.title || ''; heroSubtitle.value = contentState.hero?.subtitle || '';
+    shopHeadline.value = contentState.shop?.headline || ''; shopDescription.value = contentState.shop?.description || '';
+    dealsHeadline.value = contentState.deals?.headline || ''; dealsDescription.value = contentState.deals?.description || '';
+    reviewsHeadline.value = contentState.reviews?.headline || ''; reviewsDescription.value = contentState.reviews?.description || '';
+    contactEmail.value = contentState.contact?.email || ''; contactPhone.value = contentState.contact?.phone || '';
+  } catch (e) { setStatus(e.message,'error'); }
+})();
+saveBtn.addEventListener('click', async () => {
+  try {
+    const payload = { ...contentState,
+      hero:{title:heroTitle.value.trim(),subtitle:heroSubtitle.value.trim()},
+      shop:{headline:shopHeadline.value.trim(),description:shopDescription.value.trim()},
+      deals:{headline:dealsHeadline.value.trim(),description:dealsDescription.value.trim()},
+      reviews:{headline:reviewsHeadline.value.trim(),description:reviewsDescription.value.trim()},
+      contact:{email:contactEmail.value.trim(),phone:contactPhone.value.trim()}
+    };
+    await apiRequest('/api/admin/content',{method:'PUT',body:JSON.stringify(payload)});
+    contentState = payload; setStatus('Saved successfully.','ok');
+  } catch (e) { setStatus(e.message,'error'); }
+});
+</script></body></html>

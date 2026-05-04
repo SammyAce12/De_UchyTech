@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Users | Admin</title><link rel="stylesheet" href="admin/admin.css" /></head>
+<body><div class="layout"><aside class="sidebar"><div class="brand">De_UchyTech Admin</div><nav class="menu">
+<a href="admin-dashboard.html">Dashboard</a><a href="admin-content.html">Site Content</a><a href="admin-products.html">Products</a><a href="admin-reviews.html">Reviews</a><a href="admin-users.html">Users</a></nav></aside>
+<main><header class="topbar"><div><h1>Users</h1><p>View registered buyers and seller accounts.</p></div><div class="top-actions"><button class="btn btn-danger logout-btn">Logout</button></div></header>
+<section class="content"><div class="card"><div class="users-head"><div>Name</div><div>Email</div><div>Role</div></div><div id="users"></div></div></section></main></div>
+<script src="auth.js"></script><script src="admin/admin-common.js"></script>
+<script>
+(async function(){
+  const user = await requireSeller(); if (!user) return;
+  try {
+    const data = await loadAdminData();
+    users.innerHTML = (data.users || []).map((u) => `<div class="user-row"><div>${u.name}</div><div>${u.email}</div><div><span class="pill">${u.role}</span></div></div>`).join('');
+  } catch (e) { console.error(e); }
+})();
+</script></body></html>
